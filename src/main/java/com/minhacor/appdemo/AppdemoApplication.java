@@ -13,6 +13,7 @@ import com.minhacor.appdemo.domain.Cidade;
 import com.minhacor.appdemo.domain.Cliente;
 import com.minhacor.appdemo.domain.Endereco;
 import com.minhacor.appdemo.domain.Estado;
+import com.minhacor.appdemo.domain.ItemPedido;
 import com.minhacor.appdemo.domain.Pagamento;
 import com.minhacor.appdemo.domain.PagamentoComBoleto;
 import com.minhacor.appdemo.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.minhacor.appdemo.repositories.CidadeRepository;
 import com.minhacor.appdemo.repositories.ClienteRepository;
 import com.minhacor.appdemo.repositories.EnderecoRepository;
 import com.minhacor.appdemo.repositories.EstadoRepository;
+import com.minhacor.appdemo.repositories.ItemPedidoRepository;
 import com.minhacor.appdemo.repositories.PagamentoRepository;
 import com.minhacor.appdemo.repositories.PedidoRepository;
 import com.minhacor.appdemo.repositories.ProdutoRepository;
@@ -55,6 +57,9 @@ public class AppdemoApplication implements CommandLineRunner{
 	
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(AppdemoApplication.class, args);
@@ -122,6 +127,19 @@ public class AppdemoApplication implements CommandLineRunner{
 		
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
 		
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 		
 	}
 
