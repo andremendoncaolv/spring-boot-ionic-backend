@@ -2,20 +2,47 @@ package com.minhacor.appdemo.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.minhacor.appdemo.services.validation.ClienteInsert;
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty(message="Preenchimento obgrigatório.")
+	@Length(min=5, max=120, message ="O tamanho deve ser entre 5 e 120 caracteres.")
 	private String nome;
+	
+	@NotEmpty(message="Preenchimento obgrigatório.")
+	@Email(message="Email inválido.")
 	private String email;
+	
+	@NotEmpty(message="Preenchimento obgrigatório.")
 	private String cpfOuCnpj;
+	
 	private Integer tipoCliente;
+	
+	@NotEmpty(message="Preenchimento obgrigatório.")
 	private String logradouro;
+	
+	@NotEmpty(message="Preenchimento obgrigatório.")
 	private String numero;
+	
+	@NotEmpty(message="Preenchimento obgrigatório.")
 	private String complemento;
+	
+	@NotEmpty(message="Preenchimento obgrigatório.")
 	private String bairro;	
+	
+	@NotEmpty(message="Preenchimento obgrigatório.")
 	private String cep;
 	
+	@NotEmpty(message="Preenchimento obgrigatório.")
 	private String telefone1;
 	private String telefone2;
 	private String telefone3;
